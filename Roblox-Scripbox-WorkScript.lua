@@ -176,7 +176,7 @@ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/
         
 -- =======<加载ui库>=======
 local Start = tick()
-local ui =loadstring(game:HttpGet("https://raw.githubusercontent.com/javaKL666/ScriptHub/refs/heads/main/Scriptui.lua"))()
+local ui =loadstring(game:HttpGet("https://raw.githubusercontent.com/javaKL666/JAVASGITHUBSCRIPTBOX/refs/heads/main/Roblox-Github-Work-Script-ui.lua"))()
 local win = ui:new("工脚本")
 
 Notification:Notify(
