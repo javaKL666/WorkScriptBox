@@ -122,7 +122,7 @@ function library.new(library, name,theme)
         end
       end
 -------------------------AL------------------------------
-ALTransparency = 0.6
+ALTransparency = 1
 ALcolor = Color3.fromRGB(0,255,127)
 -------------------------AL------------------------------
 if theme == 'dark' then
@@ -561,7 +561,7 @@ UIG.Parent = Open
           SectionText.Size = UDim2.new(0, 401, 0, 36)
           SectionText.Font = Enum.Font.GothamSemibold
           SectionText.Text = name
-          SectionText.TextColor3 = (0, 0, 255)
+          SectionText.TextColor3 = ALcolor
           SectionText.TextSize = 16.000
           SectionText.TextXAlignment = Enum.TextXAlignment.Left
           
