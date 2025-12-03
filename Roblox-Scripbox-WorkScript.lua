@@ -180,8 +180,8 @@ local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/javaKL666/
 local win = ui:new("工脚本")
 
 Notification:Notify(
-        {Title = "工脚本", Description = "Hello World"},
-        {OutlineColor = Color3.fromRGB(0, 0, 0),Time = 9, Type = "image"},
+        {Title = "工脚本", Description = "Hello"},
+        {OutlineColor = Color3.fromRGB(0, 0, 0),Time =6, Type = "image"},
         {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(258, 58, 68)})
 -- =======<播放音效-旧音效>=======
 local Sound = Instance.new("Sound")
