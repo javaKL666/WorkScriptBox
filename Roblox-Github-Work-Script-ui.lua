@@ -589,7 +589,7 @@ UIG.Parent = Open
           
           Objs.Name = "Objs"
           Objs.Parent = Section
-          Objs.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
+          Objs.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
           Objs.BackgroundTransparency = 1
           Objs.BorderSizePixel = 0
           Objs.Position = UDim2.new(0, 6, 0, 36)
@@ -629,7 +629,7 @@ UIG.Parent = Open
             
             BtnModule.Name = "BtnModule"
             BtnModule.Parent = Objs
-            BtnModule.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
+            BtnModule.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
             BtnModule.BackgroundTransparency = 1.000
             BtnModule.BorderSizePixel = 0
             BtnModule.Position = UDim2.new(0, 0, 0, 0)
@@ -678,7 +678,7 @@ UIG.Parent = Open
           TextLabel.Size = UDim2.new(0, 428, 0, 22)
           TextLabel.Font = Enum.Font.GothamSemibold
           TextLabel.Text = text
-          TextLabel.TextColor3 = ALcolor
+          TextLabel.TextColor3 = Color3.fromRGB(0, 0, 255)
           TextLabel.BackgroundTransparency = ALTransparency
           TextLabel.TextSize = 14.000
     
@@ -721,7 +721,7 @@ UIG.Parent = Open
             ToggleBtn.AutoButtonColor = false
             ToggleBtn.Font = Enum.Font.GothamSemibold
             ToggleBtn.Text = "   " .. text
-            ToggleBtn.TextColor3 = ALcolor
+            ToggleBtn.TextColor3 = Color3.fromRGB(255, 0, 0)
             ToggleBtn.TextSize = 16.000
             ToggleBtn.TextXAlignment = Enum.TextXAlignment.Left
             
