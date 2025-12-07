@@ -197,36 +197,36 @@ local Sound = Instance.new("Sound")
  --]]
  
 -- =======<添加Tab选项>=======
-local Information = win:Tab("信息类","7734068321") -- 左侧边栏分类
-local announcement = win:Tab("公告类","7734068321") -- 左侧边栏分类
-local main = win:Tab("通用类","7733779610") -- 左侧边栏分类
-local tools = win:Tab("工具类","7733779610") -- 左侧边栏分类
-local ScriptHub = win:Tab("脚本中心","7733992604") -- 左侧边栏分类
-local TeleportPlayerToflings = win:Tab("传送与甩飞","7733779610") -- 左侧边栏分类
-local Tube9178 = win:Tab("刀子🔪类","7733779610") -- 左侧边栏分类
-local AimbotToBulleTtracking = win:Tab("自瞄与子弹","7733779610") -- 左侧边栏分类
-local Entertainment = win:Tab("娱乐类","7734068321") -- 左侧边栏分类
-local Action = win:Tab("动作类","7733779610") -- 左侧边栏分类
-local esp = win:Tab("ESP类","7733779610") -- 左侧边栏分类
-local music = win:Tab("音乐类","7733779610") -- 左侧边栏分类
-local fling = win:Tab("甩飞类","7733779610") -- 左侧边栏分类
-local vr = win:Tab("vr","7733779610") -- 左侧边栏分类
-local GenesisFE = win:Tab("创世纪FE","7733779610") -- 左侧边栏分类
-local MelonFE = win:Tab("MelonFE","7733779610") -- 左侧边栏分类
-local hitbox = win:Tab("范围","7733779610") -- 左侧边栏分类
-local PictureToLightShadow = win:Tab("画质与光影","7733992604") -- 左侧边栏分类
+local Information = win:Tab("信息类","7733765398") -- 左侧边栏分类
+local announcement = win:Tab("公告类","7733765398") -- 左侧边栏分类
+local main = win:Tab("通用类","7733765398") -- 左侧边栏分类
+local tools = win:Tab("工具类","7733765398") -- 左侧边栏分类
+local ScriptHub = win:Tab("脚本中心","7733765398") -- 左侧边栏分类
+local TeleportPlayerToflings = win:Tab("传送与甩飞","7733765398") -- 左侧边栏分类
+local Tube9178 = win:Tab("刀子🔪类","7733765398") -- 左侧边栏分类
+local AimbotToBulleTtracking = win:Tab("自瞄与子弹","7733765398") -- 左侧边栏分类
+local Entertainment = win:Tab("娱乐类","7733765398") -- 左侧边栏分类
+local Action = win:Tab("动作类","7733765398") -- 左侧边栏分类
+local esp = win:Tab("ESP类","7733765398") -- 左侧边栏分类
+local music = win:Tab("音乐类","7733765398") -- 左侧边栏分类
+local fling = win:Tab("甩飞类","7733765398") -- 左侧边栏分类
+local vr = win:Tab("vr","7733765398") -- 左侧边栏分类
+local GenesisFE = win:Tab("创世纪FE","7733765398") -- 左侧边栏分类
+local MelonFE = win:Tab("MelonFE","7733765398") -- 左侧边栏分类
+local hitbox = win:Tab("范围","7733765398") -- 左侧边栏分类
+local PictureToLightShadow = win:Tab("画质与光影","7733765398") -- 左侧边栏分类
 local PlayerRotation = win:Tab("人物旋转","7733779610") -- 左侧边栏分类
-local Robux = win:Tab("Robux","7733992604") -- 左侧边栏分类
-local hack = win:Tab("黑客","7733992604") -- 左侧边栏分类
-local Kid = win:Tab("儿子","7733992604") -- 左侧边栏分类
-local Time = win:Tab("时间","7733992604") -- 左侧边栏分类
-local BackDoor = win:Tab("后门","7733992604") -- 左侧边栏分类
-local InfiniteyieldCommand = win:Tab("指令","7733992604") -- 左侧边栏分类
-local Executant = win:Tab("注入器","7733992604") -- 左侧边栏分类
+local Robux = win:Tab("Robux","7733765398") -- 左侧边栏分类
+local hack = win:Tab("黑客","7733765398") -- 左侧边栏分类
+local Kid = win:Tab("儿子","7733765398") -- 左侧边栏分类
+local Time = win:Tab("时间","7733765398") -- 左侧边栏分类
+local BackDoor = win:Tab("后门","7733765398") -- 左侧边栏分类
+local InfiniteyieldCommand = win:Tab("指令","7733765398") -- 左侧边栏分类
+local Executant = win:Tab("注入器","7733765398") -- 左侧边栏分类
 
 -- =======<游戏列表>=======
 
-local NaturalDisasterSurvival = win:Tab("自然灾害","7733992604") -- 左侧边栏分类
+local NaturalDisasterSurvival = win:Tab("自然灾害","7733765398") -- 左侧边栏分类
 
 local about = Information:section("信息类",true) -- 分类内功能分类
 
