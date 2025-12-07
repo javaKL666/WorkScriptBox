@@ -489,13 +489,13 @@ UIG.Parent = Open
         
         TabText.Name = "TabText"
         TabText.Parent = TabIco
-        TabText.BackgroundColor3 = Color3.fromRGB(139, 0, 255)
+        TabText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         TabText.BackgroundTransparency = 1.000
         TabText.Position = UDim2.new(1.41666663, 0, 0, 0)
         TabText.Size = UDim2.new(0, 76, 0, 24)
         TabText.Font = Enum.Font.GothamSemibold
         TabText.Text = name
-        TabText.TextColor3 = ALcolor
+        TabText.TextColor3 = Color3.fromRGB(255, 165, 0)
         TabText.TextSize = 14.000
         TabText.TextXAlignment = Enum.TextXAlignment.Left
         TabText.TextTransparency = 0.2
