@@ -495,7 +495,7 @@ UIG.Parent = Open
         TabText.Size = UDim2.new(0, 76, 0, 24)
         TabText.Font = Enum.Font.GothamSemibold
         TabText.Text = name
-        TabText.TextColor3 = Color3.fromRGB(255, 165, 0)
+        TabText.TextColor3 = Color3.fromRGB(128, 0, 128)
         TabText.TextSize = 14.000
         TabText.TextXAlignment = Enum.TextXAlignment.Left
         TabText.TextTransparency = 0.2
@@ -678,7 +678,7 @@ UIG.Parent = Open
           TextLabel.Size = UDim2.new(0, 428, 0, 22)
           TextLabel.Font = Enum.Font.GothamSemibold
           TextLabel.Text = text
-          TextLabel.TextColor3 = Color3.fromRGB(0, 0, 255)
+          TextLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
           TextLabel.BackgroundTransparency = ALTransparency
           TextLabel.TextSize = 14.000
     
