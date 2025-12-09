@@ -10,66 +10,223 @@ if game.Players.LocalPlayer.Name == "pro_xx863" or game.Players.LocalPlayer.Name
 local TextChatService = game:GetService("TextChatService") local ReplicatedStorage = game:GetService("ReplicatedStorage") local function SendChatMessage(message) if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then local textChannel = TextChatService.TextChannels.RBXGeneral textChannel:SendAsync(message) else ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All") end end SendChatMessage("Welcome!!! 使用工脚本")
 --]]
 
--- ======<显示北京时间>=======
-local LBLG = Instance.new("ScreenGui")
-local LBL = Instance.new("TextLabel")
-local PlayerLabel = Instance.new("TextLabel")
-local player = game.Players.LocalPlayer
+local Gui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local AgreeButton = Instance.new("TextButton")
+local AgreeUICorner = Instance.new("UICorner")
+local PhotoLabel = Instance.new("ImageLabel")
+local CloseButton = Instance.new("TextButton")
+local CloseUICorner = Instance.new("UICorner")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local TextLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
 
-LBLG.Name = "LBLG"
-LBLG.Parent = game.CoreGui
-LBLG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-LBLG.Enabled = true
+-- 设置主GUI
+Gui.Name = "TaShaScriptUI"
+Gui.Parent = game.CoreGui
+Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Gui.ResetOnSpawn = false
 
-LBL.Name = "LBL"
-LBL.Parent = LBLG
-LBL.BackgroundColor3 = Color3.new(1, 1, 1)
-LBL.BackgroundTransparency = 1
-LBL.BorderColor3 = Color3.new(0, 0, 0)
-LBL.Position = UDim2.new(0, 5, 0, 10)
-LBL.Size = UDim2.new(0, 250, 0, 35)
-LBL.Font = Enum.Font.GothamSemibold
-LBL.Text = "时间:加载中..."
-LBL.TextColor3 = Color3.new(1, 1, 1)
-LBL.TextScaled = false
-LBL.TextSize = 16
-LBL.TextWrapped = false
-LBL.Visible = true
-LBL.TextXAlignment = Enum.TextXAlignment.Left
-LBL.TextYAlignment = Enum.TextYAlignment.Top
-LBL.ZIndex = 10
+-- 主框架
+Frame.Parent = Gui
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.15, 0, 0.075, 0)
+Frame.Size = UDim2.new(0.7, 0, 0.8, 0)
+Frame.ClipsDescendants = true
 
-LBL.TextSize = 16
-LBL.Size = UDim2.new(0, 150, 0, 50)
-LBL.Position = UDim2.new(0, 10, 0, 10)
-LBL.TextXAlignment = Enum.TextXAlignment.Right
+-- 圆角
+UICorner.Parent = Frame
+UICorner.CornerRadius = UDim.new(0, 12)
 
-local Heartbeat = game:GetService("RunService").Heartbeat
-local LastIteration, Start
-local FrameUpdateTable = { }
+-- 标题栏
+local TitleBar = Instance.new("Frame")
+TitleBar.Name = "TitleBar"
+TitleBar.Parent = Frame
+TitleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+TitleBar.BorderSizePixel = 0
+TitleBar.Size = UDim2.new(1, 0, 0.08, 0)
 
-local function HeartbeatUpdate()
-    LastIteration = tick()
-    for Index = #FrameUpdateTable, 1, -1 do
-        FrameUpdateTable[Index + 1] = (FrameUpdateTable[Index] >= LastIteration - 1) and FrameUpdateTable[Index] or nil
-    end
-    FrameUpdateTable[1] = LastIteration
-    local CurrentFPS = (tick() - Start >= 1 and #FrameUpdateTable) or (#FrameUpdateTable / (tick() - Start))
-    CurrentFPS = CurrentFPS - CurrentFPS % 1
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.Parent = TitleBar
+TitleCorner.CornerRadius = UDim.new(0, 12)
+
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Parent = TitleBar
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0.02, 0, 0, 0)
+TitleLabel.Size = UDim2.new(0.5, 0, 1, 0)
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.Text = "工脚本 v2.0"
+TitleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+TitleLabel.TextSize = 18
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- 图片标签 - 已更新为指定图片
+PhotoLabel.Parent = Frame
+PhotoLabel.Image = "rbxassetid://1747662434324"
+PhotoLabel.ImageTransparency = 0
+PhotoLabel.Position = UDim2.new(0.027, 0, 0.1, 0)
+PhotoLabel.Size = UDim2.new(0.47, 0, 0.75, 0)
+PhotoLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+PhotoLabel.BorderSizePixel = 0
+PhotoLabel.ScaleType = Enum.ScaleType.Fit  -- 确保图片适应框架
+
+local PhotoCorner = Instance.new("UICorner")
+PhotoCorner.Parent = PhotoLabel
+PhotoCorner.CornerRadius = UDim.new(0, 10)
+
+local PhotoStroke = Instance.new("UIStroke")
+PhotoStroke.Parent = PhotoLabel
+PhotoStroke.Color = Color3.fromRGB(80, 80, 90)
+PhotoStroke.Thickness = 2
+
+-- 同意按钮
+AgreeButton.Parent = Frame
+AgreeButton.BackgroundColor3 = Color3.fromRGB(86, 164, 254)
+AgreeButton.Position = UDim2.new(0.548, 0, 0.83, 0)
+AgreeButton.Size = UDim2.new(0.4, 0, 0.1, 0)
+AgreeButton.AutoButtonColor = false
+AgreeButton.Text = "使用工脚本"
+AgreeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+AgreeButton.Font = Enum.Font.GothamBold
+AgreeButton.TextSize = 18
+
+AgreeUICorner.Parent = AgreeButton
+AgreeUICorner.CornerRadius = UDim.new(0, 8)
+
+local AgreeStroke = Instance.new("UIStroke")
+AgreeStroke.Parent = AgreeButton
+AgreeStroke.Color = Color3.fromRGB(120, 180, 255)
+AgreeStroke.Thickness = 2
+
+-- 关闭按钮
+CloseButton.Parent = TitleBar
+CloseButton.BackgroundColor3 = Color3.fromRGB(220, 70, 70)
+CloseButton.Position = UDim2.new(0.94, 0, 0.15, 0)
+CloseButton.Size = UDim2.new(0.05, 0, 0.7, 0)
+CloseButton.AutoButtonColor = false
+CloseButton.Text = "×"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 20
+
+CloseUICorner.Parent = CloseButton
+CloseUICorner.CornerRadius = UDim.new(0, 6)
+
+-- 滚动框架
+ScrollingFrame.Parent = Frame
+ScrollingFrame.Position = UDim2.new(0.52, 0, 0.13, 0)
+ScrollingFrame.Size = UDim2.new(0.477, 0, 0.7, 0)
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+ScrollingFrame.BackgroundTransparency = 0
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 2, 0)
+ScrollingFrame.ScrollBarThickness = 5
+ScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 120)
+
+local ScrollCorner = Instance.new("UICorner")
+ScrollCorner.Parent = ScrollingFrame
+ScrollCorner.CornerRadius = UDim.new(0, 8)
+
+local ScrollStroke = Instance.new("UIStroke")
+ScrollStroke.Parent = ScrollingFrame
+ScrollStroke.Color = Color3.fromRGB(80, 80, 90)
+ScrollStroke.Thickness = 2
+
+-- 文本标签
+TextLabel.Parent = ScrollingFrame
+TextLabel.Size = UDim2.new(1, -20, 2, 0)
+TextLabel.Position = UDim2.new(0, 10, 0, 10)
+TextLabel.Text = [[
+欢迎使用工脚本
+
+更新内容:
+- 添加了公告
+- 移除了娱乐类
+- 移除了屏幕北京时间
+]]
+TextLabel.TextSize = 16
+TextLabel.TextWrapped = true
+TextLabel.Font = Enum.Font.Gotham
+TextLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+TextLabel.BackgroundTransparency = 1
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+-- 文本框
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+TextBox.Position = UDim2.new(0.6, 0, 0.05, 0)
+TextBox.Size = UDim2.new(0.3, 0, 0.05, 0)
+TextBox.Font = Enum.Font.Gotham
+TextBox.PlaceholderText = "输入公告内容..."
+TextBox.Text = "工脚本"
+TextBox.TextColor3 = Color3.fromRGB(220, 220, 220)
+TextBox.TextSize = 16
+TextBox.ClearTextOnFocus = false
+
+local TextBoxUICorner = Instance.new("UICorner")
+TextBoxUICorner.Parent = TextBox
+TextBoxUICorner.CornerRadius = UDim.new(0, 6)
+
+local TextBoxUIStroke = Instance.new("UIStroke")
+TextBoxUIStroke.Parent = TextBox
+TextBoxUIStroke.Thickness = 1
+TextBoxUIStroke.Color = Color3.fromRGB(80, 80, 90)
+
+-- 按钮交互效果
+local function buttonHoverEffect(button, hoverColor, originalColor)
+    button.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = hoverColor}
+        ):Play()
+    end)
     
-    local hue = tick() % 5 / 5
-    local r = math.sin(hue * 6.28 + 0) * 127 + 128
-    local g = math.sin(hue * 6.28 + 2) * 127 + 128
-    local b = math.sin(hue * 6.28 + 4) * 127 + 128
-    local color = Color3.fromRGB(r, g, b)
+    button.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = originalColor}
+        ):Play()
+    end)
     
-    LBL.Text = ("北京时间:"..os.date("%H").."时"..os.date("%M").."分"..os.date("%S"))
-    LBL.TextColor3 = color
-    PlayerLabel.TextColor3 = color
+    button.MouseButton1Down:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = Color3.fromRGB(
+                originalColor.R * 0.7,
+                originalColor.G * 0.7,
+                originalColor.B * 0.7
+            )}
+        ):Play()
+    end)
+    
+    button.MouseButton1Up:Connect(function()
+        game:GetService("TweenService"):Create(
+            button,
+            TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+            {BackgroundColor3 = hoverColor}
+        ):Play()
+    end)
 end
- 
-Start = tick()
-Heartbeat:Connect(HeartbeatUpdate)
+
+-- 应用按钮效果
+buttonHoverEffect(AgreeButton, Color3.fromRGB(96, 174, 264), Color3.fromRGB(86, 164, 254))
+buttonHoverEffect(CloseButton, Color3.fromRGB(240, 90, 90), Color3.fromRGB(220, 70, 70))
+
+-- 按钮功能
+CloseButton.MouseButton1Click:Connect(function()
+    Gui:Destroy()
+end)
+
+AgreeButton.MouseButton1Click:Connect(function()
+    Gui:Destroy()
+    runScript()
 
 print("工助手帮你开了禁Afk")
 		local vu = game:GetService("VirtualUser")
@@ -209,7 +366,6 @@ local ScriptHub = win:Tab("脚本中心","7733765398") -- 左侧边栏分类
 local TeleportPlayerToflings = win:Tab("传送与甩飞","7733765398") -- 左侧边栏分类
 local Tube9178 = win:Tab("刀子🔪类","7733765398") -- 左侧边栏分类
 local AimbotToBulleTtracking = win:Tab("自瞄与子弹","7733765398") -- 左侧边栏分类
-local Entertainment = win:Tab("娱乐类","7733765398") -- 左侧边栏分类
 local Action = win:Tab("动作类","7733765398") -- 左侧边栏分类
 local esp = win:Tab("ESP类","7733765398") -- 左侧边栏分类
 local music = win:Tab("音乐类","7733765398") -- 左侧边栏分类
@@ -447,11 +603,11 @@ about:Slider("跳跃高度", "JumpPower", game.Players.LocalPlayer.Character.Hum
 spawn(function() while task.wait() do game.Players.LocalPlayer.Character.Humanoid.JumpPower = Jump end end)
 end)
 
-about:Slider('相机广角', 'Sliderflag', 70, 0.1 ,180, false, function(v)
+about:Slider('相机广角', 'Sliderflag', 70, 0 ,180, false, function(v)
         game.Workspace.CurrentCamera.FieldOfView = v
 end)
 
-about:Slider('玩家血量值', 'Sliderflag',  100, 0.1, 100,false, function(Value)
+about:Slider('玩家血量值', 'Sliderflag',  100, 0, 100,false, function(Value)
     game.Players.LocalPlayer.Character.Humanoid.Health = Value
 end)
 
@@ -482,6 +638,7 @@ end
 about:Textbox("快速跑步", "run", "输入", function(speedValue)  
   Speed = speedValue
 end)
+
 about:Toggle("开启快速跑步", "switch", false, function(enabled)  
   if enabled == true then
     sudu = game:GetService("RunService").Heartbeat:Connect(function()      
@@ -2218,691 +2375,6 @@ getgenv().FrontDistance = 5
 getgenv().BackDistance = 5
 
 local RunService = game:GetService("RunService")
-
-local about = Entertainment:section("娱乐类1",false) -- 分类内功能分类
-
-about:Button("黑洞",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/iimateiYT/Scripts/main/Black%20Hole.lua"))()
-end)
-
-about:Button("火车头跑步",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E8%B6%8A%E8%B7%91%E8%B6%8A%E5%BF%AB.txt"))()
-end)
-
-
-about:Button("计时器",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E8%AE%A1%E6%97%B6%E5%99%A8.txt"))()
-end)
-
-
-about:Button("蹲下r15",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Azizanzz0/Scripts/refs/heads/main/Crouching.txt"))()
-end)
-
-
-about:Button("连点器",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/114514mim/kdjddjosso/refs/heads/main/make%20in%20china%20bilbil%20%E7%BA%B8%E9%A3%9E%E6%9C%BAyut"))()
-end)
-
-
-about:Button("无头和断腿 (仅限自己可见)",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Brainrot-Jumping-FE-emote-speed-54028"))()
-end)
-
-
-about:Button("大运",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/3LD4D0/Crazy-Man-R6/36ec60d16bf8d208c40807aa0fd2662af76a5385/Crazy%20Man%20R6"))()
-end)
-
-
-about:Button("隐身1",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/vP6CrQJj"))()
-end)
-
-
-about:Button("隐身2",function() -- （单点类）
-    loadstring(game:HttpGet('https://pastebin.com/raw/3Rnd9rHf'))()
-end)
-
-about:Button("隐身道具",function() -- （单点类）
-    loadstring(game:HttpGet("https://gist.githubusercontent.com/skid123skidlol/cd0d2dce51b3f20ad1aac941da06a1a1/raw/f58b98cce7d51e53ade94e7bb460e4f24fb7e0ff/%257BFE%257D%2520Invisible%2520Tool%2520(can%2520hold%2520tools)",true))()
-end)
-
-about:Button("音乐播放器",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/ScriptAuthorization%20Source'))()Ioad('7208e39603889391caf77f6ff7d21e01')
-end)
-
-local about = Entertainment:section("娱乐类2",false) -- 分类内功能分类
-
-about:Button("心灵牵引",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%BF%BB%E8%AF%91.txt"))()
-end)
-
-about:Button("假好友",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Biem6ondo/mc/refs/heads/main/STARTUP"))()
-end)
-
-about:Button("我的世界",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmaboy123z/MYFRIENDSCRIPT/refs/heads/main/MYNEWFRIENDSPAWNER"))()
-end)
-
-about:Button("失重",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Rawbr10/Roblox-Scripts/refs/heads/main/0%20Graviy%20Trip%20Universal"))()
-end)
-
-about:Button("神秘聊天",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/MtgpaZaf"))()
-end)
-
-about:Button("聊天查询器",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/v-oidd/chat-tracker/main/chat-tracker.lua"))()
-end)
-
-about:Button("假管理",function() -- （单点类）
-     loadstring(game:HttpGet("https://pastebin.com/raw/vhis9HZy"))()
-end)
-
-local about = Entertainment:section("娱乐类3",false) -- 分类内功能分类
-
-about:Button("跳墙",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ScpGuest666/Random-Roblox-script/refs/heads/main/Roblox%20WallHop%20V4%20script"))()
-end)
-
-about:Button("蜘蛛侠",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E8%9C%98%E8%9B%9B%E4%BE%A0.txt"))()
-end)
-
-about:Button("物理枪",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/FEwuliqiang"))()
-end)
-
-about:Button("建筑工具",function() -- （单点类）
-    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
-end)
-
-about:Button("青蛙走路特效",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/vhis9HZy"))()
-end)
-
-about:Button("遁地",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/obf_rTvXTs8F16D8D2oiLxZ62E1E9jT1we312yUyJr2h72Vwqr32l37rirU1S89hqRV7.lua.txt"))()
-end)
-
-about:Button("在别人身上旋转",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ShutUpJamesTheLoserAlt/hatspin/refs/heads/main/hat"))()
-end)
-
-about:Button("开车",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/AstraOutlight/my-scripts/refs/heads/main/fe%20car%20v3"))()
-end)
-
-local about = Entertainment:section("娱乐类4",false) -- 分类内功能分类
-
-about:Button("超慢超跳",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fake-lag-41217"))()
-end)
-
-about:Button("刷屏机器",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E5%88%B7%E5%B1%8F.txt"))()
-end)
-
-about:Button("消色差",function() -- （单点类）
-    loadstring(game:HttpGet("https://gist.githubusercontent.com/MelonsStuff/1e606bc885a3c12fd50bc8f29ae6ac49/raw/6f2e187cc59818d2a308bdd055ae2a93bf2fcb64/Achromatic.lua"))()
-end)
-
-about:Button("查看别人物品拦",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E7%9C%8B%E7%89%A9%E5%93%81%E6%A0%8F.txt"))()
-end)
-
-about:Button("变成球",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/KaterHub-Inc/scripts/refs/heads/main/unofficial-Projects/FEHamsterBall.lua"))()
-end)
-
-about:Button("克隆一模一样的你",function() -- （单点类）
-    loadstring(game:GetObjects('rbxassetid://7339698872')[1].Source)()
-end)
-
-about:Button("Shift键lock1",function() -- （单点类）
-    loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Mobile-Shiftlock-12348"))()
-end)
-
-about:Button("Shift键lock2",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/shiftlock"))()
-end)
-
-about:Button("无头r15",function() -- （单点类）
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/假无头.lua"),true))()
-end)
-
-about:Button("无头r6",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Valiant-Ui-Lib-Gazed-/refs/heads/main/Head%20Pack'))()
-end)
-
-local about = Entertainment:section("娱乐类5",false) -- 分类内功能分类
-
-about:Button("尺寸",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/J65dgYnB",true))()
-end)
-
-about:Button("克隆R6体型",function() -- （单点类）
-    -- Instances:
- 
-local ScreenGui = Instance.new("ScreenGui")
-local R6 = Instance.new("TextButton")
-local TextButton = Instance.new("TextButton")
- 
---Properties:
- 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
- 
-R6.Name = "R6"
-R6.Parent = ScreenGui
-R6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-R6.Position = UDim2.new(-0.000343383319, 0, 0.32815966, 0)
-R6.Size = UDim2.new(0, 29, 0, 29)
-R6.Font = Enum.Font.SourceSans
-R6.Text = "R6"
-R6.TextColor3 = Color3.fromRGB(0, 0, 0)
-R6.TextSize = 14.000
-R6.MouseButton1Down:connect(function()
- loadstring(game:HttpGet(('https://pastebin.com/raw/jHGVauVX'),true))()
-end)
- 
-TextButton.Parent = ScreenGui
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.Position = UDim2.new(0, 0, 0.414634138, 0)
-TextButton.Size = UDim2.new(0, 72, 0, 27)
-TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = "Team ck"
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextSize = 14.000
-TextButton.MouseButton1Down:connect(function()
- loadstring(game:HttpGet(('https://pastebin.com/raw/ukFZuXbb'),true))()
-end)
-end)
-
-about:Button("失去镰刀魂者",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/gObl00x/My-Converts/refs/heads/main/Lost%20Hope%20Scythe.lua"))()
-end)
-
-about:Button("多道具1",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Tools-giver-26246"))()
-end)
-
-about:Button("多道具2",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fake-Gamepass-V4-38580"))()
-end)
-
-about:Button("变身r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-R6-Animations-on-R15-16865"))()
-end)
-
-about:Button("死亡布娃娃",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/shakk-code/fe-ragdoll-script/refs/heads/main/script.lua', false))()
-end)
-
-about:Button("翅膀r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/zm3e6eFT"))()
-end)
-
-about:Button("计算机",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Calculator'))()
-end)
-
-about:Button("电脑彩虹准心",function() -- （单点类）
-    local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-local Camera = workspace.CurrentCamera
-
-local player = Players.LocalPlayer
-
--- === CONFIG ===
-local LineCount = 4
-local Radius = 7
-local LineLength = 15
-local LabelText = "彩虹准心"
-
--- === CROSSHAIR OBJECTS ===
-local CrosshairLines = {}
-
-for i = 1, LineCount do
-    local line = Drawing.new("Line")
-    line.Thickness = 2
-    line.Visible = true
-    table.insert(CrosshairLines, line)
-end
-
-local Dot = Drawing.new("Circle")
-Dot.Radius = 2
-Dot.Filled = true
-Dot.Visible = true
-
-local Label = Drawing.new("Text")
-Label.Text = LabelText
-Label.Size = 16
-Label.Center = true
-Label.Outline = true
-Label.Visible = true
-Label.Font = 2
-
--- === MOUSE HIDING ===
-local function hideMouse()
-    UserInputService.MouseIconEnabled = false
-end
-
--- === Hide mouse on respawn too ===
-player.CharacterAdded:Connect(function()
-    task.wait(0.5)
-    hideMouse()
-end)
-
--- Initial hide
-hideMouse()
-
--- === FUNCTION: Get rainbow color (HSV to RGB) ===
-local function getRainbowColor(timeOffset)
-    local hue = (tick() + timeOffset) % 5 / 5 -- cycle every 5 seconds
-    return Color3.fromHSV(hue, 1, 1)
-end
-
--- === MAIN ANIMATION LOOP ===
-local angle = 0
-RunService.RenderStepped:Connect(function()
-    local mousePos = UserInputService:GetMouseLocation()
-    local center = Vector2.new(mousePos.X, mousePos.Y)
-
-    local rainbowColor = getRainbowColor(0)
-
-    -- Update crosshair lines
-    for i, line in ipairs(CrosshairLines) do
-        local a = angle + (math.pi * 2 / LineCount) * (i - 1)
-        local from = Vector2.new(center.X + math.cos(a) * Radius, center.Y + math.sin(a) * Radius)
-        local to = Vector2.new(center.X + math.cos(a) * (Radius + LineLength), center.Y + math.sin(a) * (Radius + LineLength))
-        line.From = from
-        line.To = to
-        line.Color = rainbowColor
-    end
-
-    Dot.Position = center
-    Dot.Color = rainbowColor
-
-    Label.Position = Vector2.new(center.X, center.Y + 25)
-    Label.Color = rainbowColor
-
-    angle += 0.05
-end)
-end)
-
-local about = Entertainment:section("娱乐类6",false) -- 分类内功能分类
-
-about:Button("原地复活",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/hQLWaCQd"))()
-end)
-
-about:Button("天使",function() -- （单点类）
-    -- Remote script URL (inspect before running)
--- To run manually after review, paste this into the editor and press Execute:
-loadstring(game:HttpGet("https://raw.githubusercontent.com/nicolasbarbosa323/the-angel/refs/heads/main/The%20Angel.txt"))()
-end)
-
-about:Button("聊天屏蔽器",function() -- （单点类）
-    loadstring(game:GetObjects("rbxassetid://1262435912")[1].Source)()
-end)
-
-about:Button("死亡笔记",function() -- （单点类）
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/wanjiakongzhi"))()
-end)
-
-about:Button("强行装备和丢弃装备",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E5%BC%BA%E8%A1%8C%E4%B8%A2%E5%BC%83.txt"))()
-end)
-
-about:Button("地板垫底",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Part%20Fly%20Bypass'))()
-end)
-
-about:Button("geor",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/GBmWn4eZ", true))()
-end)
-
-about:Button("防重生",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/miglels33/God-Mode-Script/refs/heads/main/GodModeScript.md"))()
-end)
-
-about:Button("聊天画画",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ocfi/_/refs/heads/main/a"))()
-end)
-
-about:Button("开车",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/AstraOutlight/my-scripts/refs/heads/main/fe%20car%20v3"))()
-end)
-
-about:Button("实现数据",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/dfFru4vn"))()
-end)
-
-about:Button("超慢跑跳",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fake-lag-41217"))()
-end)
-
-about:Button("头部宠物",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty40.lua"))()
-end)
-
-local about = Entertainment:section("变化类",false) -- 分类内功能分类
-
-about:Button("老身体r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastefy.app/1grwWXDj/raw"))()
-end)
-
-about:Button("Hacklord",function() -- （单点类）
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ian49972/SCRIPTS/refs/heads/main/HacklordV2"))()
-end)
-
-about:Button("Admin-Noli",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Universal-Admin-Noli-66548"))()
-end)
-
-about:Button("星光",function() -- （单点类）
-    loadstring(game:HttpGet('https://pastebin.com/raw/bvPbLBrT'))()
-end)
-
-about:Button("锤子道具",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ScriptRbx/BanHammer/refs/heads/main/Rbx.lua"))()
-end)
-
-about:Button("自由视角",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/sKQ1mSGy"))()
-end)
-
-about:Button("Devoyance",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ian49972/SCRIPTS/refs/heads/main/Devoyance"))()
-end)
-
-about:Button("布娃娃r15",function() -- （单点类）
-    --[[
-	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
-]]
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-
-local player = Players.LocalPlayer
-
--- GUI Setup
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "RagdollGui"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = player:WaitForChild("PlayerGui")
-
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(0, 140, 0, 40)
-button.Position = UDim2.new(0, 20, 0, 20)
-button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-button.TextColor3 = Color3.new(1, 1, 1)
-button.Text = "Toggle Ragdoll"
-button.Font = Enum.Font.SourceSansBold
-button.TextSize = 18
-button.Parent = screenGui
-
--- State
-local isRagdolled = false
-local motorBackup = {}
-
-local function getCharacter()
-	return player.Character or player.CharacterAdded:Wait()
-end
-
--- Ragdoll function
-local function toggleRagdoll()
-	local character = getCharacter()
-	local humanoid = character:FindFirstChildOfClass("Humanoid")
-	if not humanoid or humanoid.Health <= 0 then return end
-
-	local root = character:FindFirstChild("HumanoidRootPart")
-	if not root then return end
-
-	if not isRagdolled then
-		-- Disable humanoid states to allow physics to take over
-		humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-		humanoid.AutoRotate = false
-
-		-- Store original joints
-		motorBackup = {}
-
-		for _, joint in ipairs(character:GetDescendants()) do
-			if joint:IsA("Motor6D") then
-				local socket = Instance.new("BallSocketConstraint")
-				local a1 = Instance.new("Attachment")
-				local a2 = Instance.new("Attachment")
-
-				a1.CFrame = joint.C0
-				a2.CFrame = joint.C1
-				a1.Parent = joint.Part0
-				a2.Parent = joint.Part1
-
-				socket.Attachment0 = a1
-				socket.Attachment1 = a2
-				socket.Parent = joint.Parent
-				socket.LimitsEnabled = true
-				socket.TwistLimitsEnabled = true
-
-				motorBackup[joint.Name .. "_" .. joint:GetFullName()] = {
-					Part0 = joint.Part0,
-					Part1 = joint.Part1,
-					C0 = joint.C0,
-					C1 = joint.C1,
-					Parent = joint.Parent,
-				}
-
-				joint:Destroy()
-			end
-		end
-
-		-- Make them fall by applying a slight upward velocity first
-		root.Velocity = Vector3.new(0, 15, 0)
-
-		isRagdolled = true
-		button.Text = "Unragdoll"
-
-	else
-		-- Restore motors
-		for _, data in pairs(motorBackup) do
-			local motor = Instance.new("Motor6D")
-			motor.Name = "RestoredMotor"
-			motor.Part0 = data.Part0
-			motor.Part1 = data.Part1
-			motor.C0 = data.C0
-			motor.C1 = data.C1
-			motor.Parent = data.Parent
-		end
-		motorBackup = {}
-
-		humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
-		humanoid.AutoRotate = true
-
-		-- Remove leftover attachments/sockets
-		for _, item in ipairs(character:GetDescendants()) do
-			if item:IsA("BallSocketConstraint") or item:IsA("Attachment") then
-				item:Destroy()
-			end
-		end
-
-		isRagdolled = false
-		button.Text = "Toggle Ragdoll"
-	end
-end
-
--- Revert on respawn
-player.CharacterAdded:Connect(function(char)
-	isRagdolled = false
-	motorBackup = {}
-	button.Text = "Toggle Ragdoll"
-end)
-
-button.MouseButton1Click:Connect(toggleRagdoll)
-end)
-
-about:Button("经典蛇",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/qwertys/refs/heads/main/qwerty5.lua"))()
-end)
-
-local about = Entertainment:section("娱乐类7",false) -- 分类内功能分类
-
-about:Button("杀戮光环",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Markklol/Script/refs/heads/main/Sword%20Script"))()
-end)
-
-about:Button("道具降落伞",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-classic-parachute-24843"))()
-end)
-
-about:Button("变成猫r15",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/Y1MkBRn3"))()
-end)
-
-about:Button("僵尸r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastefy.app/JOWniO6o/raw"))()
-end)
-
-about:Button("僵尸r15",function() -- （单点类）
-    loadstring(game:HttpGet(('https://pastefy.app/n42Ougzx/raw'),true))()
-end)
-
-about:Button("滚动冲刺r15和r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastefy.app/ZhKVgCK3/raw"))()
-end)
-
-about:Button("道具帽子",function() -- （单点类）
-    --made by Nightmare#0930
-local lp = game.Players.LocalPlayer
-local char = lp.Character
-for i, v in pairs(char:GetChildren()) do
-if v:IsA("BallSocketConstraint") then
-v:Destroy()
-end
-end
-for i, v in pairs(char:GetChildren()) do
-if v:IsA("HingeConstraint") then
-v:Destroy()
-end
-end
-for i, v in pairs(char.Humanoid:GetAccessories()) do
-local hat = v.Name
-char[hat].Archivable = true
-local fake = char[hat]:Clone()
-fake.Parent = char
-fake.Handle.Transparency = 1
-local hold = false
-local enabled = false
-char[hat].Handle.AccessoryWeld:Destroy()
-local tool = Instance.new("Tool", lp.Backpack)
-tool.RequiresHandle = true
-tool.CanBeDropped = false
-tool.Name = hat
-local handle = Instance.new("Part", tool)
-handle.Name = "Handle"
-handle.Size = Vector3.new(1, 1, 1)
-handle.Massless = true
-handle.Transparency = 1
-local positions = {
-forward = tool.GripForward,
-pos = tool.GripPos,
-right = tool.GripRight,
-up = tool.GripUp
-}
-tool.Equipped:connect(function()
-hold = true
-end)
-tool.Unequipped:connect(function()
-hold = false
-end)
-tool.Activated:connect(function()
-if enabled == false then
-enabled = true
-tool.GripForward = Vector3.new(-0.976,0,-0.217)
-tool.GripPos = Vector3.new(.95,-0.76,1.4)
-tool.GripRight = Vector3.new(0.217,0, 0.976)
-tool.GripUp = Vector3.new(0,1,0)
-wait(.8)
-tool.GripForward = positions.forward
-tool.GripPos = positions.pos
-tool.GripRight = positions.right
-tool.GripUp = positions.up
-enabled = false
-end
-end)
-game:GetService("RunService").Heartbeat:connect(function()
-pcall(function()
-char[hat].Handle.Velocity = Vector3.new(30, 0, 0)
-if hold == false then
-char[hat].Handle.CFrame = fake.Handle.CFrame
-elseif hold == true then
-char[hat].Handle.CFrame = handle.CFrame
-end
-end)
-end)
-end
-end)
-
-about:Button("爬行r15",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/0Ben1/fe/main/obf_vZDX8j5ggfAf58QhdJ59BVEmF6nmZgq4Mcjt2l8wn16CiStIW2P6EkNc605qv9K4.lua.txt'))()
-end)
-
-about:Button("反复横跳",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-7yd7-I-Emote-Script-48024"))()
-end)
-
-about:Button("前后空翻",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E5%89%8D%E5%90%8E%E7%A9%BA%E7%BF%BB.txt"))()
-end)
-
-about:Button("FPS显示",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastefy.app/d9j82YJr/raw",true))()
-end)
-
-local about = Entertainment:section("娱乐类8",false) -- 分类内功能分类
-
-about:Button("聊天翻译器",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Translator'))()
-end)
-
-about:Button("gojo道具",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/vzqZcTAU"))()
-end)
-
-about:Button("剑客物品r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Linked-Sword-R6-Script-40329"))()
-end)
-
-about:Button("可乐道具",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Coca-Cola-Tool-34866"))()
-end)
-
-about:Button("光剑r6",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/gObl00x/Pendulum-Fixed-AND-Others-Scripts/refs/heads/main/Dual%20Ultima%20RB%20Swords"))()
-end)
-
-about:Button("SonicR15",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Azizanzz0/FE-R15-Sonic-X-Super/refs/heads/main/Protected%20SonicXSuper.txt"))()
-end)
-
-about:Button("定位走路传送",function() -- （单点类）
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Modifier%20Gui'))()
-end)
-
-about:Button("放克表情",function() -- （单点类）
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/9s2dyhcgwm-svg/Troll-phonk-meme/refs/heads/main/The%20Script"))()
-end)
-
-about:Button("meme工具",function() -- （单点类）
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Meme-Tools-V3-38009"))()
-end)
-
-about:Button("喝毒药",function() -- （单点类）
-    loadstring(game:HttpGet("https://pastebin.com/raw/UvD3DaqR"))()
-end)
 
 local about = fling:section("甩飞类",true) -- 分类内功能分类
 
@@ -5495,3 +4967,14 @@ end)
 about:Button("哥特风环 v1",function() -- （单点类）
     loadstring(game:HttpGet("https://raw.githubusercontent.com/javaKL666/Super-ring-Script/refs/heads/main/Gothic-Ring-V1.lua"))()
 end)
+
+end)
+
+Frame.Position = UDim2.new(0.15, 0, -1, 0)
+Frame.Visible = true
+
+game:GetService("TweenService"):Create(
+    Frame,
+    TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+    {Position = UDim2.new(0.15, 0, 0.075, 0)}
+):Play()
