@@ -561,7 +561,7 @@ UIG.Parent = Open
           SectionText.Size = UDim2.new(0, 401, 0, 36)
           SectionText.Font = Enum.Font.GothamSemibold
           SectionText.Text = name
-          SectionText.TextColor3 = Color3.fromRGB(255, 255, 255)
+          SectionText.TextColor3 = ALcolor
           SectionText.TextSize = 16.000
           SectionText.TextXAlignment = Enum.TextXAlignment.Left
           
@@ -706,7 +706,7 @@ UIG.Parent = Open
             
             ToggleModule.Name = "ToggleModule"
             ToggleModule.Parent = Objs
-            ToggleModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ToggleModule.BackgroundColor3 = ALcolor
             ToggleModule.BackgroundTransparency = 1.000
             ToggleModule.BorderSizePixel = 0
             ToggleModule.Position = UDim2.new(0, 0, 0, 0)
